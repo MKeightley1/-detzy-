@@ -75,6 +75,7 @@
 			$this->etzyAd = []; // Instantiate stdClass object
 			$this->etzyAd['pageContent'] = $content;
 			$this->etzyAd['data'] = [];	
+			$this->status = true;
 		}
 
 		public function collectData(){
@@ -85,18 +86,17 @@
 				
 				$propertyValue = '';
 				
-				if(!isset($data[1][0]) && $this->status){
+				if(count($data[1])==0 && $this->status){
 					$this->status = false;
 				}
+					
 				$propertyValue = $data[1][0];
 				
 				if (strpos($property, 'Short description') !== false) {
 					$urlElements = explode("/", $this->etzyAd['data']['Shop Link']);
 					$shortDescrition = preg_replace("/(<a.{0,200}\/a>)/", "LINK", $data[1][0]);
 					
-					//echo $shortDescrition;
-					
-					$propertyValue = "Seller: <a target='_blank' href='{$this->etzyAd['data']['Shop Link-affilate']}'>{$urlElements[count($urlElements)-1]}</a><br>".$data[1][0];
+					$propertyValue = "Seller: <a target='_blank' href='{$this->etzyAd['data']['Shop Link-affilate']}'>{$urlElements[count($urlElements)-1]}</a><br>".$shortDescrition;
 				}
 				
 				if (strpos($property, 'Images') !== false) {
@@ -164,7 +164,8 @@
 		if($status){
 			$fileData[] = $result;
 		}else{
-			print("<pre>".print_r($newArray[$i],true)."</pre>");
+			echo $newArray[$i]."<br>";
+			//print("<pre>".print_r($newArray[$i],true)."</pre>");
 		}
 	}
 		
