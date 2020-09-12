@@ -31,7 +31,7 @@
 	}
 
 	function saveToFile($list){
-		$file = fopen("etzyLinx.csv","w");
+		$file = fopen("EtsyProducts.csv","w");
 
 		foreach ($list as $line) {
 		  fputcsv($file, $line);
@@ -65,7 +65,7 @@
 			"Images" 		=> '/meta\ property\=\"og\:image\"\ content\=\"(.{0,200})\"/',
 			"Product Link"	=> '/meta\ property\=\"og\:url\"\ content\=\"(.{1,400})[?]/s',
 			"Shop Link"	=> '/meta\ property\=\"etsymarketplace\:shop\"\ content\=\"(.{1,200})\"/',
-			"Short description" 	=> '/data\-product\-details\-description\-text\-content.{1,100}\>[\ \s\n]{0,50}(.{0,1000})\<\/p\>/s',
+			"Short description" 	=> '/data\-product\-details\-description\-text\-content.{1,100}\>[\ \s\n]{0,50}(.{0,3000})\<\/p\>.{0,100}wt\-text\-center\-xs/s',
 		];
 	
 		public function __construct(string $content){
@@ -90,7 +90,9 @@
 				
 				if (strpos($property, 'Short description') !== false) {
 					$urlElements = explode("/", $this->etzyAd['data']['Product Link']);
-					$propertyValue = "<br>Seller: <a target='_blank' href='{$this->etzyAd['data']['Shop Link-affilate']}'>{$urlElements[count($urlElements)-1]}</a> <br> ".$data[1][0];
+					
+					//print("<pre>".print_r($data,true)."</pre>");
+					$propertyValue = "Seller: <a target='_blank' href='{$this->etzyAd['data']['Shop Link-affilate']}'>{$urlElements[count($urlElements)-1]}</a><br>".$data[1][0];
 				}
 				
 				
@@ -118,6 +120,7 @@
 
 
 	$startTime = time();
+	$currentDate = date("d-m-Y");
 
 	$newArray = uploadFileContents($_FILES["uploaded"]);
 	
@@ -139,12 +142,12 @@
 	saveToFile($fileData);
 
 
-	//print("<pre>".print_r($fileData,true)."</pre>");
+	//print("<pre>".print_r($newArray,true)."</pre>");
 
 
 
 
-	echo '<p><a href="etzyLinx.csv">Download CSV file</a></p>';
+	echo "<p><a href='EtsyProducts.csv'>Download CSV file</a></p>";
 
 	echo "ContentPages:".count($listOfPageUrlsContent).'<br>';
 
