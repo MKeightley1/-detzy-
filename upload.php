@@ -67,7 +67,7 @@
 			"Regular price" => '/meta\ property\=\"product\:price\:amount\"\ content\=\"([0-9\.]{1,20})\"/',
 			//"Images" 		=> '/meta\ property\=\"og\:image\"\ content\=\"(.{0,200})\"/',
 			"Images" 		=> '/data\-src\-zoom\-image\=\"(.{0,400}\.jpg)\"/',
-			"Short description" 	=> '/data\-product\-details\-description\-text\-content.{1,100}\>[\ \s\n]{0,50}(.{0,3000})\<\/p\>.{0,100}wt\-text\-center\-xs/s',
+			"Short description" 	=> '/data\-product\-details\-description\-text\-content.{1,100}\>[\ \s\n]{0,50}(.{0,10000})\<\/p\>.{0,100}wt\-text\-center\-xs/s',
 			
 		];
 	
@@ -85,10 +85,13 @@
 				preg_match_all($regex, $this->etzyAd['pageContent'], $data);
 				
 				$propertyValue = '';
-				
-				if(count($data[1])==0 && $this->status){
+				/*
+				if(count($data)==0 && $this->status && (strpos($property, 'Images') !== true)){
+					echo $property."::";
+					var_dump($data);
 					$this->status = false;
 				}
+				*/
 					
 				$propertyValue = $data[1][0];
 				
@@ -156,16 +159,17 @@
 
 
 	echo "<b>Sold products</b><br>";
-	for($i=0; $i<count($listOfPageUrlsContent); $i++){
+	for($i=0; $i<count($listOfPageUrlsContent); $i++){		
+		
 		$obj = new EtzyLinx($listOfPageUrlsContent[$i]);
 		$obj->collectData();
 		$result = $obj->run();
-		$status = $obj->getStatus();
-		if($status){
+		
+		if(strlen($result['Regular price']."")>0){
 			$fileData[] = $result;
 		}else{
 			echo $newArray[$i]."<br>";
-			//print("<pre>".print_r($newArray[$i],true)."</pre>");
+			//("<pre>".print_r($result,true)."</pre>");
 		}
 	}
 		
