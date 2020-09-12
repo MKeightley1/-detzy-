@@ -89,7 +89,7 @@
 				$propertyValue = $data[1][0];
 				
 				if (strpos($property, 'Short description') !== false) {
-					$urlElements = explode("/", $this->etzyAd['data']['Product Link']);
+					$urlElements = explode("/", $this->etzyAd['data']['Shop Link']);
 					
 					//print("<pre>".print_r($data,true)."</pre>");
 					$propertyValue = "Seller: <a target='_blank' href='{$this->etzyAd['data']['Shop Link-affilate']}'>{$urlElements[count($urlElements)-1]}</a><br>".$data[1][0];
@@ -99,6 +99,8 @@
 				$this->etzyAd['data'][$property] = $propertyValue;
 				
 			}
+			
+			$this->etzyAd['data']["Button text"] = "Buy Now";
 			
 		}
 		
@@ -129,7 +131,7 @@
 
 
 	$fileData = [
-		['Name', 'Regular price', 'Images','Product Link-affilate','Product Link','Shop Link-affilate','Shop Link', 'Short description']
+		['Name', 'Regular price', 'Images','External URL','Product Link','Shop Link Affilate','Shop Link', 'Short description', 'Button text']
 	];
 
 	for($i=0; $i<count($listOfPageUrlsContent); $i++){
