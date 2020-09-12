@@ -93,10 +93,13 @@
 				}
 				
 				if (strpos($property, 'Images') !== false) {
-					$slicedArray =  array_slice($data[1], 0, 3);
+					
+					$slicedArray = $data[1];
+					if(count($slicedArray)>3){
+						$slicedArray =  array_slice($data[1], 0, 3);
+					}
 					$propertyValue = implode(", ", $slicedArray );
 				}
-				
 				
 				$this->etzyAd['data'][$property] = $propertyValue;
 				
