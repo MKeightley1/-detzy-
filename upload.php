@@ -58,6 +58,7 @@
 
 	class EtzyLinx{
 		private $etzyAd;
+		private $status;
 		
 		private $listOfRegularExpressions = [
 			"Product Link"	=> '/meta\ property\=\"og\:url\"\ content\=\"(.{1,200})[?]/s',
@@ -84,11 +85,17 @@
 				
 				$propertyValue = '';
 				
-			
+				if(!isset($data[1][0]) && $this->status){
+					$this->status = false;
+				}
 				$propertyValue = $data[1][0];
 				
 				if (strpos($property, 'Short description') !== false) {
 					$urlElements = explode("/", $this->etzyAd['data']['Shop Link']);
+					$shortDescrition = preg_replace("/(<a.{0,200}\/a>)/", "LINK", $data[1][0]);
+					
+					//echo $shortDescrition;
+					
 					$propertyValue = "Seller: <a target='_blank' href='{$this->etzyAd['data']['Shop Link-affilate']}'>{$urlElements[count($urlElements)-1]}</a><br>".$data[1][0];
 				}
 				
@@ -121,8 +128,10 @@
 			return AWIN.$url;
 		}
 
-		public function run()
-		{
+		public function getStatus(){
+			return $this->status;
+		}
+		public function run(){
 			return $this->etzyAd['data'];
 		}
 	}
@@ -145,20 +154,21 @@
 		['Product Link', 'Shop Link', 'Shop Link Affiliate', 'Name', 'Regular price', 'Images','Short description', 'External URL', 'Type', 'Button text']
 	];
 
+
+	echo "<b>Sold products</b><br>";
 	for($i=0; $i<count($listOfPageUrlsContent); $i++){
 		$obj = new EtzyLinx($listOfPageUrlsContent[$i]);
 		$obj->collectData();
 		$result = $obj->run();
-		$fileData[] = $result;
+		$status = $obj->getStatus();
+		if($status){
+			$fileData[] = $result;
+		}else{
+			print("<pre>".print_r($newArray[$i],true)."</pre>");
+		}
 	}
 		
 	saveToFile($fileData);
-
-
-	//print("<pre>".print_r($newArray,true)."</pre>");
-
-
-
 
 	echo "<p><a href='EtsyProducts.csv'>Download CSV file</a></p>";
 
