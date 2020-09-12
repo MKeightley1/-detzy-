@@ -62,10 +62,11 @@
 		private $listOfRegularExpressions = [
 			"Name" 			=> '/meta\ property\=\"og\:title\"\ content\=\"(.{1,400})\"\ \/\>/',
 			"Regular price" => '/meta\ property\=\"product\:price\:amount\"\ content\=\"([0-9\.]{1,20})\"/',
-			"Images" 		=> '/meta\ property\=\"og\:image\"\ content\=\"(.{0,200})\"/',
+			"Images List" 		=> '/meta\ property\=\"og\:image\"\ content\=\"(.{0,200})\"/',
 			"Product Link"	=> '/meta\ property\=\"og\:url\"\ content\=\"(.{1,400})[?]/s',
 			"Shop Link"	=> '/meta\ property\=\"etsymarketplace\:shop\"\ content\=\"(.{1,200})\"/',
 			"Short description" 	=> '/data\-product\-details\-description\-text\-content.{1,100}\>[\ \s\n]{0,50}(.{0,3000})\<\/p\>.{0,100}wt\-text\-center\-xs/s',
+			"Images" 			=> '/data\-src\-zoom\-image\=\"(.{0,400}\.jpg)\"/'
 		];
 	
 		public function __construct(string $content){
@@ -93,7 +94,15 @@
 					
 					//print("<pre>".print_r($data,true)."</pre>");
 					$propertyValue = "Seller: <a target='_blank' href='{$this->etzyAd['data']['Shop Link-affilate']}'>{$urlElements[count($urlElements)-1]}</a><br>".$data[1][0];
-					echo $propertyValue;
+					//echo $propertyValue;
+				}
+				
+				if (strpos($property, 'Images') !== false) {
+					$slicedArray =  array_slice($data[1], 0, 3);
+					
+					
+					//print("<pre>".print_r($slicedArray,true)."</pre>"); 
+					$propertyValue= implode(", ", $slicedArray );
 				}
 				
 				
@@ -133,7 +142,7 @@
 
 
 	$fileData = [
-		['Name', 'Regular price', 'Images','External URL','Product Link','Shop Link Affilate','Shop Link', 'Short description', 'Button text', 'Type']
+		['Name', 'Regular price', 'Images','External URL','Product Link','Shop Link Affilate','Shop Link', 'Short description', 'Image List', 'Button text', 'Type']
 	];
 
 	for($i=0; $i<count($listOfPageUrlsContent); $i++){
