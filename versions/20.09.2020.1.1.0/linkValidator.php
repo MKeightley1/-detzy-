@@ -54,7 +54,7 @@
 		//$b = array_map('arrayTrans', $fileContents);
 		//print_r($b);
 		
-		var_dump($links);
+		//var_dump($links);
 		saveFile("log.csv","w", $links);	
 	}
 	function saveFile($filename, $method, $list = NULL){
@@ -106,12 +106,6 @@
 			return $this->results;
 		}
 	}
-	
-	
-	
-	
-	
-	
 	
 
 	//receive input
