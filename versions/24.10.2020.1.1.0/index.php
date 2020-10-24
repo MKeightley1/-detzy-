@@ -97,15 +97,10 @@
 	}
 	
 	// Takes raw data from the request
-		$postDataJson = file_get_contents('php://input');
-
-		// Converts it into a PHP object
-		$data = json_decode($postDataJson);
-	
-		$_SESSION['data']['post'] = $data;
 	$postDataJson = file_get_contents('php://input');
 
-	
+	$_SESSION['data']['post'] = $postDataJson;
+
 	//acknowledge php input
 	gateway( 'recievePostData' );	
 	
@@ -123,5 +118,5 @@
 	$response['data']['session']=$_SESSION;
 
 
-	echo json_encode($response).$postDataJson;
+	echo json_encode($response);
 ?>
