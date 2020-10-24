@@ -90,9 +90,11 @@
 				if($regexData[1] && $regexData[1]!== NULL){
 					$results[] = $regexData[1];
 				}
+				
 			}
 		}
 		
+		$_SESSION['data']['response']['count']=$sumCount;
 		$_SESSION['data']['response']['urls']=$result;
 		return true;
 	}
