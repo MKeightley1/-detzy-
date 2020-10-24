@@ -97,6 +97,13 @@
 	}
 	
 	
+	$postDataJson = file_get_contents('php://input');
+
+		// Converts it into a PHP object
+		$data = json_decode($postDataJson);
+	
+		$_SESSION['data']['post'] = $data;
+	
 	//acknowledge php input
 	gateway( 'recievePostData' );	
 	
