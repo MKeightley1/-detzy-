@@ -97,7 +97,7 @@
 	}
 	
 	
-	$urls = $_POST['urls'];
+	$urls = json_decode($_POST['urls']);
 	$_SESSION['data']['post']['urls']=$urls;
 	
 	
