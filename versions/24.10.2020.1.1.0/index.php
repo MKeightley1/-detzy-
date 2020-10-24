@@ -120,7 +120,7 @@
 
 	$response['data']['session']=$_SESSION;
 
-
+echo $_POST;
 
 	echo json_encode($response);
 ?>
