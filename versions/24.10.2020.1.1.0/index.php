@@ -74,13 +74,6 @@
 	function transformer(){
 		$listOfUrls = $_SESSION['data']['post']['urls'];
 		
-		$listOfUrls = [
-				"https://www.etsy.com/au/listing/734847058/australian-native-wreath-pink-burgundy",
-				"https://www.etsy.com/au/listing/526065852/merry-and-bright-wood-christmas-xmas",
-				"https://www.etsy.com/au/listing/253784594/set-of-4-australian-golden-wattle"
-			];
-		
-		
 		// seek url page contents
 		$pageContents = asyncURLReader($listOfUrls);
 		
