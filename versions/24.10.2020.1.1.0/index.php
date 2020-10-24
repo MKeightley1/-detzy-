@@ -74,6 +74,7 @@
 	function transformer(){
 		$listOfUrls = $_SESSION['data']['post']['urls'];
 		
+		$regexList = $_SESSION['data']['post']['Regex'];
 		// seek url page contents
 		$pageContents = asyncURLReader($listOfUrls);
 		
@@ -83,7 +84,7 @@
 		$results = [];
 		for($i=0;$i<$sumCount;$i++){
 			// for each regex filter identified
-			foreach ($_SESSION['data']['post']['Regex'] as $ref => $regex){
+			foreach ($regexList as $ref => $regex){
 				preg_match_all($regex, $pageContents[$i], $regexData);
 		
 				if($regexData[1] && $regexData[1]!== NULL){
