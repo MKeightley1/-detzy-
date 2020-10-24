@@ -33,5 +33,5 @@
 		print_r($_SESSION);
 	echo '</pre>';
 */
-	echo json_encode($_POST);
+	echo json_encode($_POST['test']);
 ?>
