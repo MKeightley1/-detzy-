@@ -27,11 +27,11 @@
 		$_SESSION["logHistory"][] = $record;
 	}	
 	
-	gateway( 'sendEmail' );	
+	//gateway( 'sendEmail' );	
+	/*
 	echo '<pre>';
 		print_r($_SESSION);
 	echo '</pre>';
-
-	var_dump( $_POST );	
-	var_dump( $_GET );	
+*/
+	echo json_encode($_POST);
 ?>
