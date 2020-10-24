@@ -105,10 +105,10 @@
 	//	$_SESSION['data']['post'] = $data;
 	
 	//acknowledge php input
-	//gateway( 'recievePostData' );	
+	gateway( 'recievePostData' );	
 	
 	//call async curl reader
-	//gateway( 'transformer' );
+	gateway( 'transformer' );
 	
 	
 	/*
@@ -118,12 +118,8 @@
 */
 
 
-	//$response['data']['session']=$_SESSION;
+	$response['data']['session']=$_SESSION;
 
 
-
-$postDataJson = file_get_contents('php://input');
-
-
-	echo json_encode($response).json_encode($_POST).$postDataJson;
+	echo json_encode($response);
 ?>
