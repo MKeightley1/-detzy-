@@ -96,6 +96,11 @@
 		return true;
 	}
 	
+	
+	$urls = $_POST['urls'];
+	$_SESSION['data']['post']['urls']=$urls;
+	
+	
 	// Takes raw data from the request
 	//$postDataJson = file_get_contents('php://input');
 
@@ -118,5 +123,5 @@
 	$response['data']['session']=$_SESSION;
 
 
-	echo json_encode($_POST);
+	echo json_encode($_SESSION);
 ?>
