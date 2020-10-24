@@ -96,7 +96,13 @@
 		return true;
 	}
 	
+	// Takes raw data from the request
+		$postDataJson = file_get_contents('php://input');
+
+		// Converts it into a PHP object
+		$data = json_decode($postDataJson);
 	
+		$_SESSION['data']['post'] = $data;
 	//$postDataJson = file_get_contents('php://input');
 
 		// Converts it into a PHP object
