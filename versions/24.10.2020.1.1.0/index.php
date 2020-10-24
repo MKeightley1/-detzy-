@@ -102,7 +102,7 @@
 	$_SESSION['data']['post'] = $postDataJson;
 
 	//acknowledge php input
-	gateway( 'recievePostData' );	
+//	gateway( 'recievePostData' );	
 	
 	//call async curl reader
 	gateway( 'transformer' );
