@@ -122,5 +122,8 @@
 
 echo $_POST;
 
-	echo json_encode($response);
+$postDataJson = file_get_contents('php://input');
+
+
+	echo json_encode($response).json_encode($_POST).$postDataJson;
 ?>
