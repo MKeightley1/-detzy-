@@ -74,7 +74,7 @@
 	function transformer(){
 		$listOfUrls = $_SESSION['data']['post']['urls'];
 		
-		$regexList = json_decode($_SESSION['data']['post']['regex']);
+		$regexList = $_SESSION['data']['post']['regex'];
 		// seek url page contents
 		$pageContents = asyncURLReader($listOfUrls);
 		
