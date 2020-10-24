@@ -95,7 +95,7 @@
 		}
 		
 		$_SESSION['data']['response']['count']=$sumCount;
-		$_SESSION['data']['response']['urls']=$result;
+		$_SESSION['data']['response']['urls']=$results;
 		return true;
 	}
 	
