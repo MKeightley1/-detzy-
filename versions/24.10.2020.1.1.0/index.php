@@ -88,7 +88,12 @@
 				preg_match_all($regex, $pageContents[$i], $regexData);
 		
 				if($regexData[1] && $regexData[1]!== NULL){
-					$results[] = $regexData[1];
+					
+					if(!isset($results[$ref])){
+						$results[$ref] = [];
+					}
+					
+					$results[$ref][] = $listOfUrls[$i];
 				}
 				
 			}
