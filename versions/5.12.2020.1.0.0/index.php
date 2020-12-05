@@ -15,7 +15,7 @@
 	if((int)$_SESSION['data']['urlParameters'][1]){
 		echo json_encode($_SESSION);
 	}else{
-		echo json_encode($_SESSION[['data']['results']]);
+		echo json_encode($_SESSION['data']['results']);
 	}
 
 	
