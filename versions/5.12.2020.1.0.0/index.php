@@ -20,7 +20,7 @@
 		$postDataData = json_decode($_POST);
 	}
 	$postDataData = deConverter($postDataData);
-	$_SESSION['data']['post']=json_decode($postDataData);
+	$_SESSION['data']['post']=$postDataData;
 	echo json_encode($_SESSION);
 	
 
