@@ -5,12 +5,12 @@
       'unavailable' => '/(Sorry\,\ this\ item\ is\ unavailable)/'
     ];
 	
-	$postDataData =  json_encode([[
+	$postDataData =  [[
 		'meta_value'=>'https://www.awin1.com/cread.php?awinmid=10781&awinaffid=338915&clickref=&ued=https%3A%2F%2Fwww.etsy.com%2Fau%2Flisting%2F744470061%2Fquokkan-around-the-christmas-tree',
 		'post_title'=>'Quokkan Around the Christmas Tree Greeting Card',
 		'post_status'=>'publish',
 		'guid'=>'https://aussiemadechristmas.com.au/product/quokkan-around-the-christmas-tree/'
-	]]);
+	]];
 
 
 	//collect GET data
@@ -20,15 +20,7 @@
 		$postDataData = json_decode($_POST);
 	}
 	$postDataData = deConverter($postDataData);
-	
-	
 	$_SESSION['data']['post']=json_decode($postDataData);
-	
-	
-	
-	
-	
-	
 	echo json_encode($_SESSION);
 	
 
@@ -40,7 +32,7 @@
 			$tempString = str_replace("%3A",":",$tempString);	
 			$tempString = explode("=", $tempString)[4];
 			
-			$data[$key]['ownUrl'] = tempString);
+			$data[$key]['ownUrl'] = $tempString;
 		}
 		return $data;
 	}
@@ -73,4 +65,3 @@
 		return $result;
 	}
 	
-?>
