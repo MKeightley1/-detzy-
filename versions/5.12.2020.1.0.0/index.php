@@ -35,7 +35,7 @@
 
 	function deConverter($data){
 		foreach($data as $key => $value){
-			$tempString = $result['meta_value'];
+			$tempString = $value['meta_value'];
 			$tempString = str_replace("%2F","/",$tempString);
 			$tempString = str_replace("%3A",":",$tempString);	
 			$tempString = explode("=", $tempString)[4];
