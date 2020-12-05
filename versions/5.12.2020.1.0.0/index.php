@@ -35,7 +35,9 @@
 		$_SESSION['data']['urlParameters'] = isset($_GET['register'])?$_GET['register'] : '0';
 	}
 	
-	function deConverter($data){
+	function deConverter(){
+		$data = $_SESSION['data']['post'];
+		
 		$listOfUrls = [];
 		foreach($data as $key => $value){
 			$tempString = $value['meta_value'];
