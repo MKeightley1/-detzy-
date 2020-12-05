@@ -33,15 +33,16 @@
 	
 
 
-	function deConverter($postData){
-		foreach($postData As $result){
+	function deConverter($data){
+		foreach($data as $key => $value){
 			$tempString = $result['meta_value'];
 			$tempString = str_replace("%2F","/",$tempString);
 			$tempString = str_replace("%3A",":",$tempString);	
 			$tempString = explode("=", $tempString)[4];
-			$result['ownUrl'] = $tempString;
+			
+			$data[$key]['ownUrl'] = tempString);
 		}
-		return $postData;
+		return $data;
 	}
 	
 	function asyncURLReader($listOfUrls) {
