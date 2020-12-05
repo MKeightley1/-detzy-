@@ -41,7 +41,7 @@
 			$tempString = explode("=", $tempString)[4];
 			$result['ownUrl'] = $tempString;
 		}
-		return $result;
+		return $postData;
 	}
 	
 	function asyncURLReader($listOfUrls) {
