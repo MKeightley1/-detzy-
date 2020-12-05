@@ -7,8 +7,19 @@
 	definePostData();
 	//collect special Url
 	deConverter($postDataData);
+	//run curl on all urls
+	asyncURLReader();
 	
-	echo json_encode($_SESSION);
+	
+	//$_SESSION['data']['results']
+	if((int)$_SESSION['data']['urlParameters'][1]){
+		echo json_encode($_SESSION);
+	}else{
+		echo json_encode($_SESSION[['data']['results']]);
+	}
+
+	
+	
 	
 	function defineConstants(){
 		$_SESSION['data']['regex'] = [
@@ -49,7 +60,9 @@
 		$_SESSION['data']['urls'] = $listOfUrls;
 	}
 	
-	function asyncURLReader($listOfUrls) {
+	function asyncURLReader() {
+		
+		$listOfUrls = $_SESSION['data']['urls'];
 		
 		$multiCurl = [];
 		$result = [];
@@ -74,6 +87,25 @@
 		}
 		curl_multi_close($mh);
 		
-		return $result;
+		//read Regex
+		// for each page contents retrieved
+		$sumCount = count($result);
+		
+		$results = [];
+		for($i=0;$i<$sumCount;$i++){
+			foreach ($_SESSION['data']['regex'] as $ref => $regex){
+				preg_match_all($regex, $result[$i], $regexData);
+		
+				if($regexData[1] && $regexData[1]!== NULL){
+					
+					if(!isset($results[$ref])){
+						$results[$ref] = [];
+					}
+					
+					$results[$ref][] = $_SESSION['data']['post'][$i];
+				}
+			}
+		}
+		$_SESSION['data']['results']=$results;
 	}
 	
