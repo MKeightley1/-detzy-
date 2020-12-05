@@ -1,20 +1,38 @@
 <?php	
-	function testFunction(){
-		sleep(5);		
-		return true;	
-	}	
+
+	$regex = [
+      'break' 	=> '/(This\ shop\ is\ taking\ a\ short\ break)/',
+      'sold'	=> '/(Sorry\,\ this\ item\ is\ sold\ out)/',
+      'unavailable' => '/(Sorry\,\ this\ item\ is\ unavailable)/'
+    ];
 	
-	function sendEmail(){
-		ini_set( 'display_errors', 1 );
-		error_reporting( E_ALL );
-		$from = "test@hostinger-tutorials.com";
-		$to = "maurice.keightley@gmail.com";
-		$subject = "1122233553666";
-		$message = "2PHP mail works just fine666";
-		$headers = "From:" . $from;
-  		return mail($to,$subject,$message, $headers);	
+	$postDataData =  json_encode([[
+'meta_value'=>'https://www.awin1.com/cread.php?awinmid=10781&awinaffid=338915&clickref=&ued=https%3A%2F%2Fwww.etsy.com%2Fau%2Flisting%2F744470061%2Fquokkan-around-the-christmas-tree',
+'post_title'=>'Quokka'n Around the Christmas Tree Greeting Card',
+'post_status'=>'publish',
+'guid'=>'https://aussiemadechristmas.com.au/product/quokkan-around-the-christmas-tree/'
+]]);
+
+
+	//collect GET data
+	$flagRegister = $_GET['register'];
+	//collect php post data
+	if((int)$flagRegister[0]){
+		$postDataData = $_POST;
 	}
 	
+	$_SESSION['data']['post']=json_decode($postDataData);
+	echo json_encode($_SESSION);
+	
+
+
+
+
+
+
+
+
+
 	function asyncURLReader($listOfUrls) {
 		
 		$multiCurl = [];
@@ -105,8 +123,8 @@
 	}
 	
 	
-	$_SESSION['data']['post']['regex']=json_decode($_POST['regex']);
-	$_SESSION['data']['post']['urls']=json_decode($_POST['urls']);
+//	$_SESSION['data']['post']['regex']=json_decode($_POST['regex']);
+//	$_SESSION['data']['post']['urls']=json_decode($_POST['urls']);
 	
 	
 	// Takes raw data from the request
@@ -128,8 +146,8 @@
 */
 
 
-	$response['data']['session']=$_SESSION;
+//	$response['data']['session']=$_SESSION;
 
 
-	echo json_encode($_SESSION);
+//	echo json_encode($_SESSION);
 ?>
