@@ -17,9 +17,6 @@
 	}else{
 		echo json_encode($_SESSION['data']['results']);
 	}
-
-	
-	
 	
 	function defineConstants(){
 		$_SESSION['data']['regex'] = [
