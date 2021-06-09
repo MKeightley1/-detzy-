@@ -1,6 +1,6 @@
 <?php	
 
-	// http://detzy.herokuapp.com/versions/09.06.2021/check.php
+	header('Access-Control-Allow-Origin: *');
 
 	class Application {
 		
