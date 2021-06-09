@@ -36,25 +36,26 @@
 		// run
 		function go(){
 			if( count($this->u) ){
-				$pCs = $this->async( $this->u);
-				//$pCs = [file_get_contents($this->u[0])];
-		
-				$sumCount = count($pCs);
+				//$pCs = $this->async( $this->u);
 				$results = [];
-				for($i=0;$i<$sumCount;$i++){
+				for($s=0;$s<count($this->u);$s++){
+					$pC = file_get_contents($this->u[$s]);
+	
 					$result = [];
 					foreach ($this->r as $ref => $regex){
-						preg_match_all($regex, $pCs[$i], $regexData);
+						preg_match_all($regex, $pC, $regexData);
 						
 						if($regexData[1] && $regexData[1]!== NULL){	
 							$result[] = $ref; 
 						}
 					}
-					$ele = explode("/", $this->u[$i]);
+					$ele = explode("/", $this->u[$s]);
 					$results[$ele[count($ele)-1]] = $result;
 				}
+				
+				$this->c = count($results);
 				$this->rs = $results;
-				$this->c = $sumCount;
+
 			}
 		}
 		
