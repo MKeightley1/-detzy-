@@ -1,5 +1,7 @@
 <?php	
 
+	// http://detzy.herokuapp.com/versions/09.06.2021/check.php
+
 	class Application {
 		
 		private $s;
@@ -34,9 +36,9 @@
 		// run
 		function go(){
 			if( count($this->u) ){
-				$pCs = $this->asyncURLReader($this->u);
-			//	$pCs = [file_get_contents($this->u[0])];
-			
+				$pCs = $this->async( $this->u);
+				//$pCs = [file_get_contents($this->u[0])];
+		
 				$sumCount = count($pCs);
 				$results = [];
 				for($i=0;$i<$sumCount;$i++){
@@ -44,7 +46,6 @@
 					foreach ($this->r as $ref => $regex){
 						preg_match_all($regex, $pCs[$i], $regexData);
 						
-					
 						if($regexData[1] && $regexData[1]!== NULL){	
 							$result[] = $ref; 
 						}
@@ -57,16 +58,15 @@
 			}
 		}
 		
-		// general functions
-		function asyncURLReader($lU) {
-		
-			$multiCurl = [];
-			$result = [];
-		
+		function async($chArray) {
+	
+			$multiCurl = array();
+			$result = array();
+			
 			$mh = curl_multi_init();
-			foreach ($lU as $i => $u) {
+			foreach ($chArray as $i => $url) {
 			  $multiCurl[$i] = curl_init();
-			  curl_setopt($multiCurl[$i], CURLOPT_URL,$u);
+			  curl_setopt($multiCurl[$i], CURLOPT_URL,$url);
 			  curl_setopt($multiCurl[$i], CURLOPT_HEADER,0);
 			  curl_setopt($multiCurl[$i], CURLOPT_RETURNTRANSFER,1);
 			  curl_multi_add_handle($mh, $multiCurl[$i]);
@@ -75,13 +75,14 @@
 			do {
 			  curl_multi_exec($mh,$index);
 			} while($index > 0);
-		
+			
 			foreach($multiCurl as $k => $ch) {
 			  $result[$k] = curl_multi_getcontent($ch);
 
 			  curl_multi_remove_handle($mh, $ch);
 			}
 			curl_multi_close($mh);
+			
 			return $result;
 		}
 		
