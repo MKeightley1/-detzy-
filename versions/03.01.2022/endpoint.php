@@ -1,5 +1,5 @@
 <?php	
-
+	header('Access-Control-Allow-Origin: *');
 	// MOE Developer - 2022-JAN-02
 
 	class Application {
